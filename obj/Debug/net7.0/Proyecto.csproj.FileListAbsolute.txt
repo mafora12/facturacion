@@ -1,0 +1,29 @@
+C:\Users\MARIANA N\Desktop\Proyecto\Proyecto\bin\Debug\net7.0\Proyecto.exe
+C:\Users\MARIANA N\Desktop\Proyecto\Proyecto\bin\Debug\net7.0\Proyecto.deps.json
+C:\Users\MARIANA N\Desktop\Proyecto\Proyecto\bin\Debug\net7.0\Proyecto.runtimeconfig.json
+C:\Users\MARIANA N\Desktop\Proyecto\Proyecto\bin\Debug\net7.0\Proyecto.dll
+C:\Users\MARIANA N\Desktop\Proyecto\Proyecto\bin\Debug\net7.0\Proyecto.pdb
+C:\Users\MARIANA N\Desktop\Proyecto\Proyecto\obj\Debug\net7.0\Proyecto.csproj.AssemblyReference.cache
+C:\Users\MARIANA N\Desktop\Proyecto\Proyecto\obj\Debug\net7.0\Proyecto.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\MARIANA N\Desktop\Proyecto\Proyecto\obj\Debug\net7.0\Proyecto.AssemblyInfoInputs.cache
+C:\Users\MARIANA N\Desktop\Proyecto\Proyecto\obj\Debug\net7.0\Proyecto.AssemblyInfo.cs
+C:\Users\MARIANA N\Desktop\Proyecto\Proyecto\obj\Debug\net7.0\Proyecto.csproj.CoreCompileInputs.cache
+C:\Users\MARIANA N\Desktop\Proyecto\Proyecto\obj\Debug\net7.0\Proyecto.dll
+C:\Users\MARIANA N\Desktop\Proyecto\Proyecto\obj\Debug\net7.0\refint\Proyecto.dll
+C:\Users\MARIANA N\Desktop\Proyecto\Proyecto\obj\Debug\net7.0\Proyecto.pdb
+C:\Users\MARIANA N\Desktop\Proyecto\Proyecto\obj\Debug\net7.0\Proyecto.genruntimeconfig.cache
+C:\Users\MARIANA N\Desktop\Proyecto\Proyecto\obj\Debug\net7.0\ref\Proyecto.dll
+C:\Users\MARIANA\Downloads\Proyecto\Proyecto\bin\Debug\net7.0\Proyecto.exe
+C:\Users\MARIANA\Downloads\Proyecto\Proyecto\bin\Debug\net7.0\Proyecto.deps.json
+C:\Users\MARIANA\Downloads\Proyecto\Proyecto\bin\Debug\net7.0\Proyecto.runtimeconfig.json
+C:\Users\MARIANA\Downloads\Proyecto\Proyecto\bin\Debug\net7.0\Proyecto.dll
+C:\Users\MARIANA\Downloads\Proyecto\Proyecto\bin\Debug\net7.0\Proyecto.pdb
+C:\Users\MARIANA\Downloads\Proyecto\Proyecto\obj\Debug\net7.0\Proyecto.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\MARIANA\Downloads\Proyecto\Proyecto\obj\Debug\net7.0\Proyecto.AssemblyInfoInputs.cache
+C:\Users\MARIANA\Downloads\Proyecto\Proyecto\obj\Debug\net7.0\Proyecto.AssemblyInfo.cs
+C:\Users\MARIANA\Downloads\Proyecto\Proyecto\obj\Debug\net7.0\Proyecto.csproj.CoreCompileInputs.cache
+C:\Users\MARIANA\Downloads\Proyecto\Proyecto\obj\Debug\net7.0\Proyecto.dll
+C:\Users\MARIANA\Downloads\Proyecto\Proyecto\obj\Debug\net7.0\refint\Proyecto.dll
+C:\Users\MARIANA\Downloads\Proyecto\Proyecto\obj\Debug\net7.0\Proyecto.pdb
+C:\Users\MARIANA\Downloads\Proyecto\Proyecto\obj\Debug\net7.0\Proyecto.genruntimeconfig.cache
+C:\Users\MARIANA\Downloads\Proyecto\Proyecto\obj\Debug\net7.0\ref\Proyecto.dll
