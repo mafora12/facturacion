@@ -17,3 +17,21 @@ namespace Facturacion
 
         // Método para agregar un producto a la lista de productos de la mesa
         public void AgregarProducto(Producto producto) => Productos.Add(producto);
+  // Método para eliminar un producto de la lista de productos de la mesa por su ID
+        public void EliminarProducto(int idProducto)
+        {
+            // Busca el producto en la lista usando el ID
+            Producto? producto = Productos.Find(p => p.GetId() == idProducto);
+            
+            // Si el producto es encontrado, lo elimina de la lista y muestra un mensaje
+            if (producto != null)
+            {
+                Productos.Remove(producto);
+                Console.WriteLine("Producto eliminado de la mesa.");
+            }
+            else
+            {
+                // Si el producto no es encontrado, muestra un mensaje de error
+                Console.WriteLine("Producto no encontrado en la mesa.");
+            }
+        }
