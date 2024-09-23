@@ -19,3 +19,22 @@ namespace Facturacion
                 Console.WriteLine(producto.ToString());
             }
         }
+        
+        // Método para agregar un nuevo producto al menú
+        public void AgregarProducto(Producto producto, bool mostrarMensaje = true)
+        {
+            // Verifica si ya existe un producto con el mismo ID
+            if (Productos.Exists(p => p.GetId() == producto.GetId()))
+            {
+                Console.WriteLine("El ID ya está en uso, elija otro.");
+            }
+            else
+            {
+                // Agrega el nuevo producto a la lista
+                Productos.Add(producto);
+                if (mostrarMensaje)
+                {
+                    Console.WriteLine("Producto agregado al menú.");
+                }
+            }
+        }
