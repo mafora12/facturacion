@@ -73,3 +73,35 @@ namespace Facturacion
                         int numMesaCuenta = int.Parse(Console.ReadLine()); // Leer número de mesa
                         restaurante.ImprimirCuentaMesa(numMesaCuenta); // Imprimir cuenta
                         break;
+                    case "6":
+                        // Solicita el ID del producto y busca dicho producto en el menú
+                        Console.Write("Ingrese el ID del producto: ");
+                        int idProductoBuscar = int.Parse(Console.ReadLine()); // Leer ID del producto
+                        // Buscar el producto por ID
+                        Producto? producto = restaurante.BuscarProductoPorId(idProductoBuscar);
+                        if (producto != null)
+                        {
+                            // Si el producto existe, se imprime su información
+                            Console.WriteLine(producto.ToString());
+                        }
+                        else
+                        {
+                            // Si el producto no se encuentra, se informa al usuario
+                            Console.WriteLine("Producto no encontrado.");
+                        }
+                        break;
+
+                    case "0":
+                        // Si se elige la opción de salir, se termina el ciclo
+                        continuar = false;
+                        break;
+
+                    default:
+                        // Manejo de opción inválida
+                        Console.WriteLine("Opción inválida. Inténtelo de nuevo.");
+                        break;
+                }
+            }
+        }
+    }
+}
