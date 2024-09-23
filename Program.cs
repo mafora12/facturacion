@@ -23,6 +23,7 @@ namespace Facturacion
                 Console.WriteLine("0. Salir");
                 Console.WriteLine("=============================");
                 Console.Write("Seleccione una opción: ");
+                // Lee la opción ingresada por el usuario
                 string? opcion = Console.ReadLine();
 
                 // Estructura switch que ejecuta la lógica según la opción seleccionada
