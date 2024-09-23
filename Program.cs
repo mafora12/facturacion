@@ -45,3 +45,31 @@ namespace Facturacion
                         // Agregar producto al menú del restaurante
                         restaurante.EditarMenu(nuevoId, nuevoNombre, nuevoPrecio, true);
                         break;
+                    case "3":
+                        // Solicita el número de mesa y el ID del producto para agregarlo a la mesa
+                        Console.Write("Ingrese el número de la mesa: ");
+                        int numMesaAgregar = int.Parse(Console.ReadLine()); // Leer número de mesa
+                        Console.Write("Ingrese el ID del producto que desea agregar: ");
+                        int idProductoAgregar = int.Parse(Console.ReadLine()); // Leer ID del producto
+                        // Agregar producto a la mesa especificada
+                        restaurante.AgregarProductoAMesa(numMesaAgregar, idProductoAgregar);
+                        break;
+
+                    case "4":
+                        // Solicita la mesa y el producto para agregar o eliminar en dicha mesa
+                        Console.Write("Ingrese el número de la mesa: ");
+                        int numMesaEditar = int.Parse(Console.ReadLine()); // Leer número de mesa
+                        Console.Write("¿Qué desea hacer? (1-Agregar, 2-Eliminar): ");
+                        int opcionEdicion = int.Parse(Console.ReadLine()); // Leer opción de edición (Agregar o Eliminar)
+                        Console.Write("Ingrese el ID del producto: ");
+                        int idProductoEditar = int.Parse(Console.ReadLine()); // Leer ID del producto
+                        // Editar productos de la mesa (agregar o eliminar)
+                        restaurante.EditarProductosMesa(numMesaEditar, opcionEdicion, idProductoEditar);
+                        break;
+
+                    case "5":
+                        // Solicita el número de mesa e imprime la cuenta de dicha mesa
+                        Console.Write("Ingrese el número de la mesa: ");
+                        int numMesaCuenta = int.Parse(Console.ReadLine()); // Leer número de mesa
+                        restaurante.ImprimirCuentaMesa(numMesaCuenta); // Imprimir cuenta
+                        break;
