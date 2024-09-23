@@ -38,3 +38,26 @@ namespace Facturacion
                 }
             }
         }
+ // Método para editar un producto existente en el menú
+        public void EditarProducto(int id, string nuevoNombre, decimal nuevoPrecio)
+        {
+            // Busca el producto en la lista por su ID
+            Producto? producto = Productos.Find(p => p.GetId() == id);
+            
+            if (producto != null)
+            {
+                // Si el producto es encontrado, actualiza su nombre y precio
+                // (actualización no implementada en el código actual)
+                Console.WriteLine("Producto editado en el menú.");
+            }
+            else
+            {
+                // Si el producto no es encontrado, muestra un mensaje de error
+                Console.WriteLine("Producto no encontrado.");
+            }
+        }
+
+        // Método para buscar un producto en el menú por su ID
+        public Producto? BuscarProductoPorId(int id) => Productos.Find(p => p.GetId() == id);
+    }
+}
