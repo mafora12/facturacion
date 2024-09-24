@@ -3,61 +3,57 @@ using System.Collections.Generic;
 
 namespace Facturacion
 {
+    // Clase que representa el menú del restaurante
     public class Menu
     {
-        // Lista pública que almacena los productos del menú
-        public List<Producto> Productos { get; set; } = new List<Producto>();
+        private List<Producto> productos = new List<Producto>(); // Lista privada que almacena los productos del menú
 
-        // Método para imprimir todos los productos del menú
+        // Método público para imprimir todos los productos del menú
         public void ImprimirMenu()
         {
             Console.WriteLine("Menú del restaurante:");
             
-            // Recorre la lista de productos y los imprime uno por uno
-            foreach (var producto in Productos)
+            foreach (var producto in productos) 
             {
-                Console.WriteLine(producto.ToString());
+                Console.WriteLine(producto.ToString()); // Imprime cada producto en el menú
             }
         }
         
-        // Método para agregar un nuevo producto al menú
+        // Método público para agregar un nuevo producto al menú
         public void AgregarProducto(Producto producto, bool mostrarMensaje = true)
         {
-            // Verifica si ya existe un producto con el mismo ID
-            if (Productos.Exists(p => p.GetId() == producto.GetId()))
+            if (productos.Exists(p => p.Id == producto.Id)) 
             {
-                Console.WriteLine("El ID ya está en uso, elija otro.");
-            }
-            else
+                Console.WriteLine("El ID ya está en uso, elija otro."); // Mensaje si ya existe un ID igual.
+         }
+            else 
             {
-                // Agrega el nuevo producto a la lista
-                Productos.Add(producto);
+                productos.Add(producto); 
                 if (mostrarMensaje)
                 {
-                    Console.WriteLine("Producto agregado al menú.");
+                    Console.WriteLine("Producto agregado al menú."); 
                 }
             }
         }
- // Método para editar un producto existente en el menú
-        public void EditarProducto(int id, string nuevoNombre, decimal nuevoPrecio)
-        {
-            // Busca el producto en la lista por su ID
-            Producto? producto = Productos.Find(p => p.GetId() == id);
-            
-            if (producto != null)
-            {
-                // Si el producto es encontrado, actualiza su nombre y precio
-                // (actualización no implementada en el código actual)
-                Console.WriteLine("Producto editado en el menú.");
-            }
-            else
-            {
-                // Si el producto no es encontrado, muestra un mensaje de error
-                Console.WriteLine("Producto no encontrado.");
-            }
-        }
 
-        // Método para buscar un producto en el menú por su ID
-        public Producto? BuscarProductoPorId(int id) => Productos.Find(p => p.GetId() == id);
-    }
+       // Método público para editar un producto existente en el menú
+       public void EditarProducto(int id, string nuevoNombre, decimal nuevoPrecio)
+       {
+         Producto? producto = productos.Find(p => p.Id == id); // Busca el producto por su ID
+
+           if (producto != null) 
+           {
+               producto.Nombre = nuevoNombre;  // Actualiza nombre y precio del producto.
+               producto.Precio = nuevoPrecio;
+               Console.WriteLine("Producto editado en el menú."); 
+           }
+           else 
+           {
+               Console.WriteLine("Producto no encontrado."); 
+           }
+       }
+
+       // Método público para buscar un producto en el menú por su ID
+       public Producto? BuscarProductoPorId(int id) => productos.Find(p => p.Id == id); 
+   }
 }

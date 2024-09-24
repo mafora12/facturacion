@@ -1,31 +1,29 @@
+using System;
+
 namespace Facturacion
 {
+    // Clase que representa un producto en el menú
     public class Producto
     {
-        // Propiedades privadas del producto
-        private int Id { get; set; } // Identificador único del producto (propiedad privada)
-        private string Nombre; // Nombre del producto (campo privado)
-        private decimal Precio; // Precio del producto (campo privado)
+        // Atributos privados del producto
+        private int id; // Identificador único del producto
+        private string nombre; // Nombre del producto
+        private decimal precio; // Precio del producto
+
+        // Propiedades públicas para acceder a los atributos privados
+        public int Id { get => id; set => id = value; }
+        public string Nombre { get => nombre; set => nombre = value; }
+        public decimal Precio { get => precio; set => precio = value; }
 
         // Constructor que inicializa las propiedades del producto
         public Producto(int id, string nombre, decimal precio)
         {
-            Id = id; // Asigna el ID del producto
-            Nombre = nombre; // Asigna el nombre del producto
-            Precio = precio; // Asigna el precio del producto
+            this.id = id; // Asigna el ID del producto
+            this.nombre = nombre; // Asigna el nombre del producto
+            this.precio = precio; // Asigna el precio del producto
         }
 
-        // Método para obtener el ID del producto (getter)
-        public int GetId() => Id;
-
-        // Método para obtener el nombre del producto (getter)
-        public string GetNombre() => Nombre;
-
-        // Método para obtener el precio del producto (getter)
-        public decimal GetPrecio() => Precio;
-
         // Sobrescribe el método ToString() para devolver una representación en cadena del producto
-        // Devuelve el ID, nombre y precio del producto formateado en una cadena legible
         public override string ToString() => $"{Id}. {Nombre} - ${Precio}";
-    }
+    }
 }
