@@ -2,81 +2,78 @@ using System;
 
 namespace Facturacion
 {
-   class Program
-   {
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Restaurante restaurante = new Restaurante();
+            Inventario inventario = new Inventario();
 
-      static void Main(string[] args)
-      {
+            // Cargar inventario si existe
+            inventario.CargarInventario("inventario.csv");
 
-         Restaurante restaurante = new Restaurante();  
-         Inventario inventario = new Inventario();  
+            bool continuar = true;
 
-         inventario.CargarInventario("inventario.json");  
+            while (continuar)
+            {
+                Console.WriteLine("\n===== Menú del Programa =====");
+                Console.WriteLine("1. Imprimir menú del restaurante");
+                Console.WriteLine("2. Agregar nuevo producto al menú");
+                Console.WriteLine("3. Agregar producto a una mesa");
+                Console.WriteLine("4. Editar productos de una mesa");
+                Console.WriteLine("5. Imprimir cuenta de una mesa");
+                Console.WriteLine("6. Imprimir factura con impuestos y propina");
+                Console.WriteLine("7. Guardar inventario");
+                Console.WriteLine("8. Cargar facturas");
+                Console.WriteLine("0. Salir");
 
-         bool continuar = true;
+                string? opcion = Console.ReadLine();
 
-         while (continuar)  
-         {
+                switch (opcion)
+                {
+                    case "1":
+                        restaurante.ImprimirMenu();
+                        break;
 
-             Console.WriteLine("\n===== Menú del Programa =====");
-             Console.WriteLine("1. Imprimir menú del restaurante");
-             Console.WriteLine("2. Agregar nuevo producto al menú");
-             Console.WriteLine("3. Agregar producto a una mesa");
-             Console.WriteLine("4. Editar productos de una mesa");
-             Console.WriteLine("5. Imprimir cuenta de una mesa");
-             Console.WriteLine("6. Imprimir factura con impuestos y propina");
-             Console.WriteLine("7. Guardar inventario");
-             Console.WriteLine("8. Cargar facturas");
-             Console.WriteLine("0. Salir");
+                    case "2":
+                        /* Solicita al usuario los datos del nuevo producto y lo agrega al menú */
+                        Console.Write("Ingrese el ID del producto: ");
+                        int nuevoId = int.Parse(Console.ReadLine());
+                        Console.Write("Ingrese el nombre del producto: ");
+                        string? nuevoNombre = Console.ReadLine();
+                        Console.Write("Ingrese el precio del producto: ");
+                        decimal nuevoPrecio = decimal.Parse(Console.ReadLine());
+                        restaurante.EditarMenu(nuevoId, nuevoNombre, nuevoPrecio, true);
+                        break;
 
-             string? opcion = Console.ReadLine();
+                    case "3":
+                        /* Solicita el número de mesa y el ID del producto para agregarlo a la mesa */
+                        Console.Write("Ingrese el número de la mesa: ");
+                        int numMesaAgregar = int.Parse(Console.ReadLine());
+                        Console.Write("Ingrese el ID del producto que desea agregar: ");
+                        int idProdutoAgregar = int.Parse(Console.ReadLine());
+                        restaurante.AgregarProductoAMesa(numMesaAgregar, idProdutoAgregar);
+                        break;
 
-             switch (opcion)  
-             {
+                    case "4":
+                        /* Solicita la mesa y el ID del producto para agregar o eliminar en dicha mesa */
+                        Console.Write("Ingrese el número de la mesa: ");
+                        int numMesaEditar = int.Parse(Console.ReadLine());
+                        Console.Write("¿Qué desea hacer? (1-Agregar, 2-Eliminar): ");
+                        int opcionEdicion = int.Parse(Console.ReadLine());
+                        Console.Write("Ingrese el ID del producto: ");
+                        int idProdutoEditar = int.Parse(Console.ReadLine());
+                        restaurante.EditarProductosMesa(numMesaEditar, opcionEdicion, idProdutoEditar);
+                        break;
 
-                 case "1":
-                     restaurante.ImprimirMenu();  
-                     break;
+                    case "5":
+                        /* Solicita el número de mesa e imprime la cuenta de dicha mesa */
+                        Console.Write("Ingrese el número de la mesa: ");
+                        int numMesaCuenta = int.Parse(Console.ReadLine());
+                        restaurante.ImprimirCuentaMesa(numMesaCuenta);
+                        break;
 
-                 case "2":
-                     /* Solicita al usuario los datos del nuevo producto y lo agrega al menú */
-                     Console.Write("Ingrese el ID del producto: ");
-                     int nuevoId = int.Parse(Console.ReadLine());  
-                     Console.Write("Ingrese el nombre del producto: ");
-                     string? nuevoNombre = Console.ReadLine();  
-                     Console.Write("Ingrese el precio del producto: ");
-                     decimal nuevoPrecio = decimal.Parse(Console.ReadLine());  
-                     restaurante.EditarMenu(nuevoId, nuevoNombre, nuevoPrecio, true);  
-                     break;
-
-                 case "3":
-                     /* Solicita el número de mesa y el ID del producto para agregarlo a la mesa */
-                     Console.Write("Ingrese el número de la mesa: ");
-                     int numMesaAgregar = int.Parse(Console.ReadLine());  
-                     Console.Write("Ingrese el ID del producto que desea agregar: ");
-                     int idProdutoAgregar = int.Parse(Console.ReadLine());  
-                     restaurante.AgregarProductoAMesa(numMesaAgregar, idProdutoAgregar);  
-                     break;
-
-                 case "4":
-                     /* Solicita la mesa y el ID del producto para agregar o eliminar en dicha mesa */
-                     Console.Write("Ingrese el número de la mesa: ");
-                     int numMesaEditar = int.Parse(Console.ReadLine());  
-                     Console.Write("¿Qué desea hacer? (1-Agregar, 2-Eliminar): ");
-                     int opcionEdicion = int.Parse(Console.ReadLine());  
-                     Console.Write("Ingrese el ID del producto: ");
-                     int idProdutoEditar = int.Parse(Console.ReadLine());  
-                     restaurante.EditarProductosMesa(numMesaEditar, opcionEdicion, idProdutoEditar);  
-                     break;
-
-                 case "5":
-                     /* Solicita el número de mesa e imprime la cuenta de dicha mesa */
-                     Console.Write("Ingrese el número de la mesa: ");
-                     int numMesaCuenta = int.Parse(Console.ReadLine());  
-                     restaurante.ImprimirCuentaMesa(numMesaCuenta);  
-                     break;
-
-                 case "6":
+                    case "6":
                       /* Solicitar número de mesa e impuestos/propina */
                       Console.Write("Ingrese el número de la mesa: ");
                       int numMesaFactura = int.Parse(Console.ReadLine());
@@ -97,30 +94,30 @@ namespace Facturacion
 
                       break;
 
-                 case "7":
-                    /* Guarda inventario a archivo JSON */
-                    inventario.GuardarInventario("inventario.json");  
-                    break;
+                    case "7":
+                       /* Guarda inventario a archivo CSV */
+                       inventario.GuardarInventario("inventario.csv");
+                       break;
 
-                 case "8":
-                    /* Carga facturas desde archivo JSON */
-                    var facturasCargadas = restaurante.CargarFacturas("facturas.json");
+                    case "8":
+                       /* Carga facturas desde archivo CSV */
+                       var facturasCargadas = restaurante.CargarFacturas("facturas.csv");
 
-                    foreach (var f in facturasCargadas) 
-                        f.ImprimirCuenta();  
+                       foreach (var f in facturasCargadas) 
+                           f.ImprimirCuenta();  
 
-                    break;
+                       break;
 
-                 case "0":
-                    continuar = false;  /* Termina ciclo si se selecciona salir */
-                    break;
+                    case "0":
+                       continuar = false;  /* Termina ciclo si se selecciona salir */
+                       break;
 
-                 default:
-                    /* Manejo de opción inválida */
-                    Console.WriteLine("Opción inválida. Inténtelo de nuevo.");  
-                    break;
-              }
-          }
-      }
-   }  
+                    default:
+                       /* Manejo de opción inválida */
+                       Console.WriteLine("Opción inválida. Inténtelo de nuevo.");  
+                       break;
+                }
+            }
+        }
+    }  
 }
