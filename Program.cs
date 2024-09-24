@@ -100,13 +100,12 @@ namespace Facturacion
                        break;
 
                     case "8":
-                       /* Carga facturas desde archivo CSV */
-                       var facturasCargadas = restaurante.CargarFacturas("facturas.csv");
-
-                       foreach (var f in facturasCargadas) 
-                           f.ImprimirCuenta();  
-
-                       break;
+                        /* Carga facturas desde archivo CSV */
+                        var facturasCargadas = restaurante.CargarFacturas("facturas.csv");
+                    
+                        foreach (var f in facturasCargadas) 
+                            f.ImprimirCuenta();  
+                        break;
 
                     case "0":
                        continuar = false;  /* Termina ciclo si se selecciona salir */
