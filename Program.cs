@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.IO;
 
 namespace Facturacion
 {
@@ -21,14 +19,15 @@ namespace Facturacion
             // Bucle principal del programa para interactuar con el menú
             while (continuar)
             {
-                // Muestra el menú de opciones en la consola
-                Console.WriteLine(" | __ )(_) ___ _ __ ___   __ _ _ __ | |__ (_)_ __   ___ ");
-                Console.WriteLine(" |  _ \\| |/ _ \\ '_ ` _ \\ / _` | '_ \\| '_ \\| | '_ \\ / _ \\");
-                Console.WriteLine(" | |_) | |  __/ | | | | | (_| | | | | | | | | | | |  __/");
-                Console.WriteLine(" |____/|_|\\___|_| |_| |_|\\__,_|_| |_|_| |_|_|_| |_|\\___|");
-                Console.WriteLine("                                                        ");
-                Console.WriteLine("                                                        ");
 
+                Console.WriteLine("  _   _       _");
+                Console.WriteLine(" | | | | ___ | | __ _");
+                Console.WriteLine(" | |_| |/ _ \\| |/ _` |");
+                Console.WriteLine(" |  _  | (_) | | (_| |");
+                Console.WriteLine(" |_| |_|\\___/|_|\\__,_|");
+                Console.WriteLine("                      ");
+                Console.WriteLine("                      ");
+                // Muestra el menú de opciones en la consola
                 Console.WriteLine("\n===== Menú del Programa =====");
                 Console.WriteLine("1. Imprimir menú del restaurante");
                 Console.WriteLine("2. Agregar nuevo producto al menú");
@@ -47,35 +46,177 @@ namespace Facturacion
                 switch (opcion)
                 {
                     case "1":
+                        // Opción 1: Imprimir el menú del restaurante
                         restaurante.ImprimirMenu();
                         break;
 
                     case "2":
-                        AgregarNuevoProducto(restaurante);
+                        // Opción 2: Agregar un nuevo producto al menú
+                        Console.Write("Ingrese el ID del producto: ");
+                        // Validar que el ID ingresado sea un número entero
+                        if (int.TryParse(Console.ReadLine(), out int nuevoId))
+                        {
+                            Console.Write("Ingrese el nombre del producto: ");
+                            string? nuevoNombre = Console.ReadLine();
+                            // Validar que el nombre no esté vacío
+                            if (!string.IsNullOrEmpty(nuevoNombre))
+                            {
+                                Console.Write("Ingrese el precio del producto: ");
+                                // Validar que el precio ingresado sea un número decimal
+                                if (decimal.TryParse(Console.ReadLine(), out decimal nuevoPrecio))
+                                {
+                                    // Agregar el producto al menú
+                                    restaurante.EditarMenu(nuevoId, nuevoNombre, nuevoPrecio, true);
+                                }
+                                else
+                                {
+                                    // Mensaje de error si el precio no es válido
+                                    Console.WriteLine("Error: El precio ingresado no es válido.");
+                                }
+                            }
+                            else
+                            {
+                                // Mensaje de error si el nombre está vacío
+                                Console.WriteLine("Error: El nombre del producto no puede estar vacío.");
+                            }
+                        }
+                        else
+                        {
+                            // Mensaje de error si el ID no es válido
+                            Console.WriteLine("Error: El ID ingresado no es válido.");
+                        }
                         break;
 
                     case "3":
-                        AgregarProductoMesa(restaurante);
+                        // Opción 3: Agregar un producto a una mesa
+                        Console.Write("Ingrese el número de la mesa: ");
+                        // Validar que el número de mesa sea un número entero
+                        if (int.TryParse(Console.ReadLine(), out int numMesaAgregar))
+                        {
+                            Console.Write("Ingrese el ID del producto que desea agregar: ");
+                            // Validar que el ID del producto sea un número entero
+                            if (int.TryParse(Console.ReadLine(), out int idProductoAgregar))
+                            {
+                                // Agregar el producto a la mesa
+                                restaurante.AgregarProductoAMesa(numMesaAgregar, idProductoAgregar);
+                            }
+                            else
+                            {
+                                // Mensaje de error si el ID del producto no es válido
+                                Console.WriteLine("Error: El ID del producto no es válido.");
+                            }
+                        }
+                        else
+                        {
+                            // Mensaje de error si el número de mesa no es válido
+                            Console.WriteLine("Error: El número de mesa no es válido.");
+                        }
                         break;
 
                     case "4":
-                        EditarProductosMesa(restaurante);
+                        // Opción 4: Editar productos de una mesa
+                        Console.Write("Ingrese el número de la mesa: ");
+                        // Validar que el número de mesa sea un número entero
+                        if (int.TryParse(Console.ReadLine(), out int numMesaEditar))
+                        {
+                            Console.Write("¿Qué desea hacer? (1-Agregar, 2-Eliminar): ");
+                            // Validar la opción de edición
+                            if (int.TryParse(Console.ReadLine(), out int opcionEdicion) && (opcionEdicion == 1 || opcionEdicion == 2))
+                            {
+                                Console.Write("Ingrese el ID del producto: ");
+                                // Validar que el ID del producto sea un número entero
+                                if (int.TryParse(Console.ReadLine(), out int idProductoEditar))
+                                {
+                                    // Editar los productos en la mesa
+                                    restaurante.EditarProductosMesa(numMesaEditar, opcionEdicion, idProductoEditar);
+                                }
+                                else
+                                {
+                                    // Mensaje de error si el ID del producto no es válido
+                                    Console.WriteLine("Error: El ID del producto no es válido.");
+                                }
+                            }
+                            else
+                            {
+                                // Mensaje de error si la opción no es válida
+                                Console.WriteLine("Error: Opción inválida.");
+                            }
+                        }
+                        else
+                        {
+                            // Mensaje de error si el número de mesa no es válido
+                            Console.WriteLine("Error: El número de mesa no es válido.");
+                        }
                         break;
 
                     case "5":
-                        ImprimirCuentaMesa(restaurante);
+                        // Opción 5: Imprimir la cuenta de una mesa
+                        Console.Write("Ingrese el número de la mesa: ");
+                        // Validar que el número de mesa sea un número entero
+                        if (int.TryParse(Console.ReadLine(), out int numMesaCuenta))
+                        {
+                            // Imprimir la cuenta de la mesa
+                            restaurante.ImprimirCuentaMesa(numMesaCuenta);
+                        }
+                        else
+                        {
+                            // Mensaje de error si el número de mesa no es válido
+                            Console.WriteLine("Error: El número de mesa no es válido.");
+                        }
                         break;
 
                     case "6":
-                        ImprimirFacturaConImpuestos(restaurante);
+                        // Opción 6: Imprimir factura con impuestos y propina
+                        Console.Write("Ingrese el número de la mesa: ");
+                        // Validar que el número de mesa sea un número entero
+                        if (int.TryParse(Console.ReadLine(), out int numMesaFactura))
+                        {
+                            Console.Write("Ingrese el impuesto: ");
+                            // Validar que el impuesto sea un número decimal
+                            if (decimal.TryParse(Console.ReadLine(), out decimal impuesto))
+                            {
+                                Console.Write("Ingrese la propina: ");
+                                // Validar que la propina sea un número decimal
+                                if (decimal.TryParse(Console.ReadLine(), out decimal propina))
+                                {
+                                    // Imprimir la cuenta de la mesa
+                                    restaurante.ImprimirCuentaMesa(numMesaFactura);
+                                    // Buscar la mesa correspondiente para generar la factura
+                                    Mesa? mesaFactura = restaurante.BuscarMesaPorNumero(numMesaFactura);
+                                    // Si la mesa existe, imprimir la factura con impuestos y propina
+                                    if (mesaFactura != null)
+                                    {
+                                        mesaFactura.ImprimirFactura(impuesto, propina);
+                                    }
+                                }
+                                else
+                                {
+                                    // Mensaje de error si la propina no es válida
+                                    Console.WriteLine("Error: La propina ingresada no es válida.");
+                                }
+                            }
+                            else
+                            {
+                                // Mensaje de error si el impuesto no es válido
+                                Console.WriteLine("Error: El impuesto ingresado no es válido.");
+                            }
+                        }
+                        else
+                        {
+                            // Mensaje de error si el número de mesa no es válido
+                            Console.WriteLine("Error: El número de mesa no es válido.");
+                        }
                         break;
 
                     case "7":
-                        inventario.GuardarInventario(@"C:\Users\MARIANA\Downloads\inventario.csv");
+                        // Opción 7: Guardar el inventario actual en un archivo CSV
+                        inventario.GuardarInventario("inventario.csv");
                         break;
 
                     case "8":
-                        var facturasCargadas = restaurante.CargarFacturas(@"C:\Users\MARIANA\Downloads\facturas.csv");
+                        // Opción 8: Cargar facturas desde un archivo CSV
+                        var facturasCargadas = restaurante.CargarFacturas("facturas.csv");
+                        // Imprimir todas las facturas cargadas
                         foreach (var f in facturasCargadas)
                         {
                             f.ImprimirCuenta();
@@ -83,147 +224,15 @@ namespace Facturacion
                         break;
 
                     case "0":
-                        // Guardar el inventario antes de salir
-                        inventario.GuardarInventario(@"C:\Users\MARIANA\Downloads\inventario.csv");
+                        // Opción 0: Salir del programa
                         continuar = false;
                         break;
 
                     default:
+                        // Mensaje en caso de que se ingrese una opción inválida
                         Console.WriteLine("Opción inválida. Inténtelo de nuevo.");
                         break;
                 }
-            }
-        }
-
-        // Método para agregar un nuevo producto al menú
-        static void AgregarNuevoProducto(Restaurante restaurante)
-        {
-            Console.Write("Ingrese el ID del producto: ");
-            if (int.TryParse(Console.ReadLine(), out int nuevoId))
-            {
-                Console.Write("Ingrese el nombre del producto: ");
-                string? nuevoNombre = Console.ReadLine();
-                if (!string.IsNullOrEmpty(nuevoNombre))
-                {
-                    Console.Write("Ingrese el precio del producto: ");
-                    if (decimal.TryParse(Console.ReadLine(), out decimal nuevoPrecio))
-                    {
-                        restaurante.EditarMenu(nuevoId, nuevoNombre, nuevoPrecio, true);
-                    }
-                    else
-                    {
-                        Console.WriteLine("Error: El precio ingresado no es válido.");
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("Error: El nombre del producto no puede estar vacío.");
-                }
-            }
-            else
-            {
-                Console.WriteLine("Error: El ID ingresado no es válido.");
-            }
-        }
-
-        // Método para agregar un producto a una mesa
-        static void AgregarProductoMesa(Restaurante restaurante)
-        {
-            Console.Write("Ingrese el número de la mesa: ");
-            if (int.TryParse(Console.ReadLine(), out int numMesaAgregar))
-            {
-                Console.Write("Ingrese el ID del producto que desea agregar: ");
-                if (int.TryParse(Console.ReadLine(), out int idProductoAgregar))
-                {
-                    restaurante.AgregarProductoAMesa(numMesaAgregar, idProductoAgregar);
-                }
-                else
-                {
-                    Console.WriteLine("Error: El ID del producto no es válido.");
-                }
-            }
-            else
-            {
-                Console.WriteLine("Error: El número de mesa no es válido.");
-            }
-        }
-
-        // Método para editar productos de una mesa
-        static void EditarProductosMesa(Restaurante restaurante)
-        {
-            Console.Write("Ingrese el número de la mesa: ");
-            if (int.TryParse(Console.ReadLine(), out int numMesaEditar))
-            {
-                Console.Write("¿Qué desea hacer? (1-Agregar, 2-Eliminar): ");
-                if (int.TryParse(Console.ReadLine(), out int opcionEdicion) && (opcionEdicion == 1 || opcionEdicion == 2))
-                {
-                    Console.Write("Ingrese el ID del producto: ");
-                    if (int.TryParse(Console.ReadLine(), out int idProductoEditar))
-                    {
-                        restaurante.EditarProductosMesa(numMesaEditar, opcionEdicion, idProductoEditar);
-                    }
-                    else
-                    {
-                        Console.WriteLine("Error: El ID del producto no es válido.");
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("Error: Opción inválida.");
-                }
-            }
-            else
-            {
-                Console.WriteLine("Error: El número de mesa no es válido.");
-            }
-        }
-
-        // Método para imprimir la cuenta de una mesa
-        static void ImprimirCuentaMesa(Restaurante restaurante)
-        {
-            Console.Write("Ingrese el número de la mesa: ");
-            if (int.TryParse(Console.ReadLine(), out int numMesaCuenta))
-            {
-                restaurante.ImprimirCuentaMesa(numMesaCuenta);
-            }
-            else
-            {
-                Console.WriteLine("Error: El número de mesa no es válido.");
-            }
-        }
-
-        // Método para imprimir la factura con impuestos y propina
-        static void ImprimirFacturaConImpuestos(Restaurante restaurante)
-        {
-            Console.Write("Ingrese el número de la mesa: ");
-            if (int.TryParse(Console.ReadLine(), out int numMesaFactura))
-            {
-                Console.Write("Ingrese el impuesto: ");
-                if (decimal.TryParse(Console.ReadLine(), out decimal impuesto))
-                {
-                    Console.Write("Ingrese la propina: ");
-                    if (decimal.TryParse(Console.ReadLine(), out decimal propina))
-                    {
-                        restaurante.ImprimirCuentaMesa(numMesaFactura);
-                        Mesa? mesaFactura = restaurante.BuscarMesaPorNumero(numMesaFactura);
-                        if (mesaFactura != null)
-                        {
-                            mesaFactura.ImprimirFactura(impuesto, propina);
-                        }
-                    }
-                    else
-                    {
-                        Console.WriteLine("Error: La propina ingresada no es válida.");
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("Error: El impuesto ingresado no es válido.");
-                }
-            }
-            else
-            {
-                Console.WriteLine("Error: El número de mesa no es válido.");
             }
         }
     }
