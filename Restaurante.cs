@@ -37,7 +37,7 @@ namespace Facturacion
         // Método para agregar un producto a una mesa.
         public void AgregarProductoAMesa(int numeroMesa, int idProducto)
         {
-            // Busca la mesa por número.
+            // esta parte Busca la mesa por número.
             Mesa? mesa = mesas.Find(m => m.GetNumero() == numeroMesa);
             // Busca el producto por ID en el menú.
             Producto? producto = menu.BuscarProductoPorId(idProducto);
