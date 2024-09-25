@@ -30,7 +30,6 @@ namespace Facturacion
                 Console.WriteLine("7. Guardar inventario");
                 Console.WriteLine("8. Cargar facturas");
                 Console.WriteLine("0. Salir");
-                Console.WriteLine("selecciona la opción: ");
 
                 // Leer la opción seleccionada por el usuario
                 string? opcion = Console.ReadLine();
