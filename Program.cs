@@ -12,8 +12,8 @@ namespace Facturacion
             Restaurante restaurante = new Restaurante();
             Inventario inventario = new Inventario();
 
-            // Intentar cargar el inventario desde un archivo si existe al iniciar el programa
-            inventario.CargarInventario(@"C:\Users\MARIANA\Downloads\inventario.csv");
+            // Intentar cargar el inventario desde un archivo si existe
+            inventario.CargarInventario("inventario.csv");
 
             // Variable para controlar si el ciclo del menú sigue ejecutándose
             bool continuar = true;
