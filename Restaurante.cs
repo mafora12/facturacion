@@ -10,142 +10,166 @@ namespace Facturacion
         private Menu menu;  // Instancia privada de la clase Menu que representa el menú del restaurante.
         private List<Mesa> mesas;  // Lista privada de instancias de la clase Mesa.
 
+        // Constructor de la clase Restaurante.
         public Restaurante()
         {
             menu = new Menu();  // Inicializa el menú.
             mesas = new List<Mesa>();  // Inicializa las mesas.
 
+            // Agrega productos al menú inicial.
             menu.AgregarProducto(new Producto(1, "Hamburguesa", 8.99m), false);
             menu.AgregarProducto(new Producto(2, "Pizza", 12.99m), false);
             menu.AgregarProducto(new Producto(3, "Ensalada", 6.50m), false);
             menu.AgregarProducto(new Producto(4, "Soda", 2.00m), false);
 
-            for (int i = 1; i <= 10; i++)  // Inicializa las mesas numeradas del 1 al 10.
+            // Inicializa las mesas numeradas del 1 al 10.
+            for (int i = 1; i <= 10; i++)
             {
                 Mesa mesa = new Mesa();
-                mesa.SetNumero(i);  
-                mesas.Add(mesa);  
+                mesa.SetNumero(i);  // Asigna el número a la mesa.
+                mesas.Add(mesa);  // Agrega la mesa a la lista de mesas.
             }
         }
 
-        public void ImprimirMenu() => menu.ImprimirMenu();  // Imprime el menú del restaurante.
+        // Método para imprimir el menú del restaurante.
+        public void ImprimirMenu() => menu.ImprimirMenu();
 
+        // Método para agregar un producto a una mesa.
         public void AgregarProductoAMesa(int numeroMesa, int idProducto)
         {
-            Mesa? mesa = mesas.Find(m => m.GetNumero() == numeroMesa);  
-            Producto? producto = menu.BuscarProductoPorId(idProducto);  
+            // Busca la mesa por número.
+            Mesa? mesa = mesas.Find(m => m.GetNumero() == numeroMesa);
+            // Busca el producto por ID en el menú.
+            Producto? producto = menu.BuscarProductoPorId(idProducto);
 
-            if (mesa != null && producto != null)  
+            // Verifica si la mesa y el producto existen.
+            if (mesa != null && producto != null)
             {
-                mesa.AgregarProducto(producto);  
+                mesa.AgregarProducto(producto);  // Agrega el producto a la mesa.
                 Console.WriteLine("Producto agregado a la mesa.");
             }
-            else  
+            else
             {
+                // Muestra mensajes de error si la mesa o el producto no se encuentran.
                 Console.WriteLine(mesa == null ? "Mesa no encontrada." : "Producto no encontrado.");
             }
         }
 
+        // Método para editar productos en una mesa.
         public void EditarProductosMesa(int numeroMesa, int opcion, int idProducto)
         {
+            // Busca la mesa por número.
             Mesa? mesa = mesas.Find(m => m.GetNumero() == numeroMesa);
 
-            if (mesa != null)  
+            if (mesa != null)
             {
-                if (opcion == 1)  // Opción para agregar un nuevo producto.
+                // Si la opción es 1, intenta agregar el producto.
+                if (opcion == 1)
                 {
                     Producto? producto = menu.BuscarProductoPorId(idProducto);
-                    if (producto != null)  
+                    if (producto != null)
                     {
                         mesa.AgregarProducto(producto);
                         Console.WriteLine("Producto agregado a la mesa.");
                     }
-                    else  
+                    else
                     {
                         Console.WriteLine("Producto no encontrado.");
                     }
                 }
-                else if (opcion == 2)  // Opción para eliminar un producto existente.
+                // Si la opción es 2, intenta eliminar el producto de la mesa.
+                else if (opcion == 2)
                 {
                     mesa.EliminarProducto(idProducto);
                 }
             }
-            else  
+            else
             {
                 Console.WriteLine("Mesa no encontrada.");
-           }
-       }
+            }
+        }
 
-       public void EditarMenu(int id, string nombre, decimal precio, bool esNuevoProducto)
-       {
-           if (esNuevoProducto)  
-           {   
-               menu.AgregarProducto(new Producto(id, nombre, precio));   
-           }   
-           else   
-           {   
-               menu.EditarProducto(id, nombre, precio);   
-           }   
-       }
+        // Método para editar el menú del restaurante.
+        public void EditarMenu(int id, string nombre, decimal precio, bool esNuevoProducto)
+        {
+            if (esNuevoProducto)
+            {
+                // Si el producto es nuevo, lo agrega al menú.
+                menu.AgregarProducto(new Producto(id, nombre, precio));
+            }
+            else
+            {
+                // Si el producto ya existe, lo edita.
+                menu.EditarProducto(id, nombre, precio);
+            }
+        }
 
-       public void ImprimirCuentaMesa(int numeroMesa)
-       {   
-           Mesa? mesa = mesas.Find(m => m.GetNumero() == numeroMesa);   
-           if (mesa != null)   
-           {   
-               mesa.ImprimirCuenta();   
-           }   
-           else   
-           {   
-               Console.WriteLine("Mesa no encontrada.");   
-           }   
-       }
+        // Método para imprimir la cuenta de una mesa específica.
+        public void ImprimirCuentaMesa(int numeroMesa)
+        {
+            // Busca la mesa por número.
+            Mesa? mesa = mesas.Find(m => m.GetNumero() == numeroMesa);
+            if (mesa != null)
+            {
+                mesa.ImprimirCuenta();  // Imprime la cuenta de la mesa.
+            }
+            else
+            {
+                Console.WriteLine("Mesa no encontrada.");
+            }
+        }
 
-       public Mesa? BuscarMesaPorNumero(int numero) => mesas.Find(m => m.GetNumero() == numero);
+        // Método para buscar una mesa por su número.
+        public Mesa? BuscarMesaPorNumero(int numero) => mesas.Find(m => m.GetNumero() == numero);
 
-       // Método público para cargar facturas desde un archivo CSV
-       public List<Mesa> CargarFacturas(string rutaArchivo)
-       {
-           var facturasCargadas = new List<Mesa>();
+        // Método para cargar facturas desde un archivo CSV.
+        public List<Mesa> CargarFacturas(string rutaArchivo)
+        {
+            // Lista para almacenar las facturas cargadas.
+            var facturasCargadas = new List<Mesa>();
 
-           if (File.Exists(rutaArchivo))
-           {
-               using (var reader = new StreamReader(rutaArchivo))
-               {
-                   string line;
-                   reader.ReadLine(); // Lee la línea de encabezado y la ignora
-                   while ((line = reader.ReadLine()) != null)
-                   {
-                       var values = line.Split(','); // Divide la línea por comas
-                       if (values.Length >= 4) // Asegura que hay suficientes valores
-                       {
-                           int numeroMesa = int.Parse(values[0]);
-                           string nombreProducto = values[1];
-                           decimal precio = decimal.Parse(values[2]);
-                           // Aquí puedes agregar lógica para manejar más campos si es necesario
+            // Verifica si el archivo existe.
+            if (File.Exists(rutaArchivo))
+            {
+                using (var reader = new StreamReader(rutaArchivo))
+                {
+                    string? line;
+                    reader.ReadLine(); // Lee la línea de encabezado y la ignora.
 
-                           // Busca o crea la mesa correspondiente
-                           Mesa mesa = facturasCargadas.Find(m => m.GetNumero() == numeroMesa);
-                           if (mesa == null)
-                           {
-                               mesa = new Mesa();
-                               mesa.SetNumero(numeroMesa);
-                               facturasCargadas.Add(mesa);
-                           }
+                    // Lee cada línea del archivo.
+                    while ((line = reader.ReadLine()) != null)
+                    {
+                        var values = line.Split(','); // Divide la línea por comas.
 
-                           // Agrega el producto a la mesa
-                           mesa.AgregarProducto(new Producto(0, nombreProducto, precio)); // ID puede ser cero o ajustarse según sea necesario
-                       }
-                   }
-               }
-               Console.WriteLine("Facturas cargadas correctamente.");
-           }
-           else
-           {
-               Console.WriteLine("El archivo no existe.");
-           }
+                        // Asegura que haya al menos 3 campos: número de mesa, nombre de producto, y precio.
+                        if (values.Length >= 3)
+                        {
+                            int numeroMesa = int.Parse(values[0]);
+                            string nombreProducto = values[1];
+                            decimal precio = decimal.Parse(values[2]);
 
-           return facturasCargadas;
-       }
-   }
+                            // Busca la mesa por número o la crea si no existe.
+                            Mesa? mesa = facturasCargadas.Find(m => m.GetNumero() == numeroMesa);
+                            if (mesa == null)
+                            {
+                                mesa = new Mesa();
+                                mesa.SetNumero(numeroMesa);
+                                facturasCargadas.Add(mesa);
+                            }
+
+                            // Agrega el producto a la mesa.
+                            mesa.AgregarProducto(new Producto(0, nombreProducto, precio)); // ID puede ser ajustado según sea necesario.
+                        }
+                    }
+                }
+                Console.WriteLine("Facturas cargadas correctamente.");
+            }
+            else
+            {
+                Console.WriteLine("El archivo no existe.");
+            }
+
+            return facturasCargadas; // Retorna la lista de mesas con las facturas cargadas.
+        }
+    }
 }
