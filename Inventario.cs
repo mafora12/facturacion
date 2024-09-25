@@ -1,83 +1,36 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
 
-namespace Facturacion
+class Inventario
 {
-    // Clase que representa el inventario del restaurante.
-    public class Inventario
+    public void CargarInventario(string rutaArchivo)
     {
-        private Dictionary<int, Producto> productos = new Dictionary<int, Producto>();
-
-        // Método público para agregar un nuevo producto al inventario.
-        public void AgregarProducto(Producto producto)
+        // Verificar si el archivo existe antes de intentar cargarlo
+        if (!File.Exists(rutaArchivo))
         {
-            if (!productos.ContainsKey(producto.Id))
-            {
-                productos[producto.Id] = producto;
-                Console.WriteLine("Producto agregado al inventario.");
-            }
-            else
-            {
-                Console.WriteLine("El producto ya existe en el inventario.");
-            }
+            Console.WriteLine("El archivo no existe. Creando un nuevo archivo.");
+            // Crear el archivo con encabezados o contenido vacío
+            File.WriteAllText(rutaArchivo, "ID,Nombre,Precio\n");
         }
-
-        // Método público para vender un producto específico.
-        public void VenderProducto(int idProducto, int cantidad)
+        
+        // Lógica para cargar los datos desde el archivo CSV
+        string[] lineas = File.ReadAllLines(rutaArchivo);
+        foreach (string linea in lineas)
         {
-            if (productos.ContainsKey(idProducto))
-            {
-                Console.WriteLine($"Se vendió {cantidad} de {productos[idProducto].Nombre}.");
-                // Aquí puedes implementar lógica adicional si es necesario.
-            }
-            else
-            {
-                Console.WriteLine("Producto no encontrado en el inventario.");
-            }
+            Console.WriteLine(linea); // Solo imprime las líneas para ver los datos cargados
+            // Aquí podrías agregar la lógica para cargar el inventario en memoria
         }
+    }
 
-        // Método público para guardar inventario a un archivo CSV.
-        public void GuardarInventario(string rutaArchivo)
+    public void GuardarInventario(string rutaArchivo)
+    {
+        // Lógica para guardar el inventario actual en el archivo CSV
+        using (StreamWriter sw = new StreamWriter(rutaArchivo))
         {
-            using (var writer = new StreamWriter(rutaArchivo))
-            {
-                writer.WriteLine("Id,Nombre,Precio"); // Encabezados del CSV
-                foreach (var producto in productos.Values)
-                {
-                    writer.WriteLine($"{producto.Id},{producto.Nombre},{producto.Precio}"); // Escribe cada producto en una línea
-                }
-            }
-            Console.WriteLine("Inventario guardado correctamente.");
+            sw.WriteLine("ID,Nombre,Precio");
+            sw.WriteLine("1,Pizza,9.99");
+            sw.WriteLine("2,Hamburguesa,6.49");
         }
-
-        // Método público para cargar inventario desde un archivo CSV.
-        public void CargarInventario(string rutaArchivo)
-        {
-            if (File.Exists(rutaArchivo))
-            {
-                using (var reader = new StreamReader(rutaArchivo))
-                {
-                    string line;
-                    reader.ReadLine(); // Lee la línea de encabezado y la ignora
-                    while ((line = reader.ReadLine()) != null)
-                    {
-                        var values = line.Split(','); // Divide la línea por comas
-                        if (values.Length == 3) // Asegura que hay tres valores
-                        {
-                            int id = int.Parse(values[0]);
-                            string nombre = values[1];
-                            decimal precio = decimal.Parse(values[2]);
-                            AgregarProducto(new Producto(id, nombre, precio)); // Agrega el producto al inventario
-                        }
-                    }
-                }
-                Console.WriteLine("Inventario cargado correctamente.");
-            }
-            else
-            {
-                Console.WriteLine("El archivo no existe.");
-            }
-        }
+        Console.WriteLine("Inventario guardado en: " + rutaArchivo);
     }
 }
