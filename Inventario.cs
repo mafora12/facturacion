@@ -20,6 +20,7 @@ class Inventario
             Console.WriteLine(linea); // Solo imprime las líneas para ver los datos cargados
             // Aquí podrías agregar la lógica para cargar el inventario en memoria
         }
+        
     }
 
     public void GuardarInventario(string rutaArchivo)
