@@ -22,6 +22,15 @@ namespace Facturacion
             while (continuar)
             {
                 // Muestra el menú de opciones en la consola
+                                                       
+
+                Console.WriteLine("  _   _       _");
+                Console.WriteLine(" | | | | _ | | __ _");
+                Console.WriteLine(" | |_| |/ _ \\| |/ _` |");
+                Console.WriteLine(" |  _  | () | | (| |");
+                Console.WriteLine(" || ||\\_/||\\,|");
+                Console.WriteLine("                      ");
+                Console.WriteLine("                      ");
                 Console.WriteLine("\n===== Menú del Programa =====");
                 Console.WriteLine("1. Imprimir menú del restaurante");
                 Console.WriteLine("2. Agregar nuevo producto al menú");
