@@ -53,7 +53,7 @@ namespace Facturacion
            }
        }
 
-       // Método público para buscar un producto en el menú por su ID
+       // es un Método público para buscar un producto en el menú por su ID
        public Producto? BuscarProductoPorId(int id) => productos.Find(p => p.Id == id); 
    }
 }
