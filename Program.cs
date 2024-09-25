@@ -11,7 +11,7 @@ namespace Facturacion
             Inventario inventario = new Inventario();
 
             // Intentar cargar el inventario desde un archivo si existe
-            inventario.CargarInventario("inventario.csv");
+            inventario.CargarInventario(@"C:\Users\MARIANA\Downloads\facturas.csv");
 
             // Variable para controlar si el ciclo del menú sigue ejecutándose
             bool continuar = true;
